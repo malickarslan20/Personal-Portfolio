@@ -1,30 +1,37 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
 function Contact() {
   const form = useRef();
+  const [isSending, setIsSending] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setIsSending(true);
 
     emailjs
       .sendForm(
-        'service_hbtes78', // Your EmailJS service ID
-        'template_epid4p8', // Your EmailJS template ID
+        'service_hbtes78',
+        'template_epid4p8',
         form.current,
-        'Xm9zWCgzexnuTEj2y' // Your public key (keep it safe!)
+        'Xm9zWCgzexnuTEj2y'
       )
       .then(
         (result) => {
-          console.log(result.text);
-          alert('Message sent successfully!');
+          setIsSending(false);
+          setShowThankYou(true);
+          toast.success('Message sent successfully!');
           form.current.reset();
+          setTimeout(() => setShowThankYou(false), 5000);
         },
         (error) => {
-          console.log(error.text);
-          alert('Failed to send message. Please try again.');
+          setIsSending(false);
+          toast.error('Failed to send message. Please try again.');
         }
       );
   };
@@ -34,7 +41,7 @@ function Contact() {
       id="contact"
       className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black px-6 py-16 text-white relative overflow-hidden"
     >
-      {/* Background blur circle */}
+      <ToastContainer />
       <div className="absolute w-[600px] h-[600px] bg-gradient-to-br from-teal-400/20 to-green-400/10 rounded-full top-[-200px] left-[-100px] blur-2xl z-0" />
 
       <motion.div
@@ -44,12 +51,20 @@ function Contact() {
         transition={{ duration: 0.7 }}
         className="relative z-10 max-w-xl mx-auto text-center space-y-10"
       >
-        {/* Heading */}
         <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-green-400">
           Contact Me
         </h2>
 
-        {/* Form */}
+        {showThankYou && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-green-400 font-semibold"
+          >
+            ✅ Thank you! Your message has been received.
+          </motion.div>
+        )}
+
         <form
           ref={form}
           onSubmit={sendEmail}
@@ -79,11 +94,40 @@ function Contact() {
 
           <motion.button
             type="submit"
+            disabled={isSending}
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.02 }}
-            className="w-full border border-teal-400 text-white py-2 rounded-md relative overflow-hidden transition"
+            className={`w-full border border-teal-400 text-white py-2 rounded-md relative overflow-hidden transition ${
+              isSending ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
-            <span className="relative z-10">Send</span>
+            {isSending ? (
+              <span className="flex justify-center items-center space-x-2">
+                <svg
+                  className="animate-spin h-5 w-5 text-teal-300"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                <span>Sending...</span>
+              </span>
+            ) : (
+              <span className="relative z-10">Send</span>
+            )}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-teal-400 to-green-400 opacity-10"
               initial={{ width: '0%' }}
@@ -93,7 +137,6 @@ function Contact() {
           </motion.button>
         </form>
 
-        {/* Let's Connect */}
         <div className="pt-8 text-sm text-gray-300 space-y-2">
           <h4 className="font-semibold text-white text-lg">Let's Connect</h4>
           <p>
@@ -102,7 +145,6 @@ function Contact() {
           </p>
         </div>
 
-        {/* Social Media Icons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +182,6 @@ function Contact() {
           ))}
         </motion.div>
 
-        {/* Footer */}
         <div className="border-t border-gray-700 pt-4 text-sm text-teal-400">
           © 2025 Malik Arslan. All Rights Reserved.
         </div>
