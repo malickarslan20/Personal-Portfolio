@@ -62,19 +62,20 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-3">
-          {sections.map((section) => (
-            <a
-              key={section}
-              href={`#${section}`}
-              onClick={toggleMenu}
-              className={navItemClasses(section)}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </a>
-          ))}
-        </div>
-      )}
+  <div className="md:hidden px-4 pb-4 pt-2 flex flex-col space-y-4">
+    {sections.map((section) => (
+      <a
+        key={section}
+        href={`#${section}`}
+        onClick={toggleMenu}
+        className={`${navItemClasses(section)} py-2 px-2 rounded-md`}
+      >
+        {section.charAt(0).toUpperCase() + section.slice(1)}
+      </a>
+    ))}
+  </div>
+)}
+
     </nav>
   );
 }

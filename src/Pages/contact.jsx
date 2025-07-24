@@ -11,10 +11,10 @@ function Contact() {
 
     emailjs
       .sendForm(
-        'service_hbtes78', // your EmailJS service ID
-        'template_epid4p8', // your EmailJS template ID
+        'service_hbtes78', // Your EmailJS service ID
+        'template_epid4p8', // Your EmailJS template ID
         form.current,
-        'Xm9zWCgzexnuTEj2y' // <-- Replace with your actual EmailJS public key (starts with 'Eg...')
+        'Xm9zWCgzexnuTEj2y' // Your public key (keep it safe!)
       )
       .then(
         (result) => {
