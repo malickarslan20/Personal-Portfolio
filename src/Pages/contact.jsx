@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
 
 function Contact() {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_hbtes78', // your EmailJS service ID
+        'template_epid4p8', // your EmailJS template ID
+        form.current,
+        'Xm9zWCgzexnuTEj2y' // <-- Replace with your actual EmailJS public key (starts with 'Eg...')
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          alert('Message sent successfully!');
+          form.current.reset();
+        },
+        (error) => {
+          console.log(error.text);
+          alert('Failed to send message. Please try again.');
+        }
+      );
+  };
+
   return (
     <div
       id="contact"
@@ -24,24 +50,35 @@ function Contact() {
         </h2>
 
         {/* Form */}
-        <form className="backdrop-blur-lg bg-white/5 border border-teal-400/40 rounded-2xl p-6 md:p-10 space-y-4 shadow-md">
+        <form
+          ref={form}
+          onSubmit={sendEmail}
+          className="backdrop-blur-lg bg-white/5 border border-teal-400/40 rounded-2xl p-6 md:p-10 space-y-4 shadow-md"
+        >
           <input
             type="text"
+            name="user_name"
             placeholder="Your Name"
+            required
             className="w-full px-4 py-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
           <input
             type="email"
+            name="user_email"
             placeholder="Your Email"
+            required
             className="w-full px-4 py-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
           <textarea
+            name="message"
             placeholder="Your Message Here..."
             rows="5"
+            required
             className="w-full px-4 py-3 bg-transparent border border-gray-600 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-teal-400"
           ></textarea>
 
           <motion.button
+            type="submit"
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.02 }}
             className="w-full border border-teal-400 text-white py-2 rounded-md relative overflow-hidden transition"
@@ -74,10 +111,10 @@ function Contact() {
           className="flex justify-center space-x-6 pt-4"
         >
           {[
-            { icon: <FaGithub />, link: "https://github.com/malickarslan20" },
-            { icon: <FaLinkedin />, link: "https://linkedin.com/in/malik-arslan-52a27627b" },
-            { icon: <FaTwitter />, link: "https://twitter.com/yourusername" },
-            { icon: <FaEnvelope />, link: "mailto:malikarslan4999@gmail.com" },
+            { icon: <FaGithub />, link: 'https://github.com/malickarslan20' },
+            { icon: <FaLinkedin />, link: 'https://linkedin.com/in/malik-arslan-52a27627b' },
+            { icon: <FaTwitter />, link: 'https://twitter.com/yourusername' },
+            { icon: <FaEnvelope />, link: 'mailto:malikarslan4999@gmail.com' },
           ].map(({ icon, link }, idx) => (
             <a
               key={idx}
