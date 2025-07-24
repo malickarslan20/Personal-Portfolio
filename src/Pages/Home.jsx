@@ -9,7 +9,10 @@ function Home() {
   };
 
   return (
-    <div id='home' className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white flex items-center justify-center px-6 relative overflow-hidden">
+    <div
+  id="home"
+  className="min-h-screen pt-24 bg-gradient-to-b from-black via-gray-900 to-black text-white flex items-center justify-center px-6 relative overflow-hidden"
+>
 
       {/* Decorative Gradient Glow Background */}
       <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-gradient-to-br from-teal-400/20 to-green-500/10 rounded-full blur-2xl z-0" />
@@ -21,6 +24,11 @@ function Home() {
         transition={{ duration: 1 }}
         className="relative z-10 text-center max-w-2xl backdrop-blur-xl bg-white/5 border border-teal-400/20 rounded-2xl p-10 shadow-lg"
       >
+        {/* Profile Image */}
+        <div className="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-4 border-teal-400">
+          <img src="/profile.jpg" alt="Malik Arslan" className="w-full h-full object-cover" />
+        </div>
+
         {/* Headline */}
         <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-green-400">
           Hi, I'm Malik Arslan
@@ -28,12 +36,12 @@ function Home() {
 
         {/* Subtitle */}
         <p className="text-lg md:text-xl text-gray-300 mb-8">
-          A passionate Frontend Developer crafting smooth and aesthetic web experiences.
+          A passionate Frontend Developer crafting smooth, responsive, and aesthetic web experiences.
+          Skilled in React, Tailwind CSS, and modern JavaScript frameworks — focused on delivering elegant UI and seamless UX.
         </p>
 
         {/* Buttons */}
-       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
             onClick={() => scrollToSection('projects')}
             className="relative inline-block px-6 py-3 rounded-lg font-medium text-white 

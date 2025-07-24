@@ -68,8 +68,8 @@ function About() {
         </h2>
 
         <p className="text-gray-300 leading-relaxed">
-          I'm <span className="text-teal-400 font-semibold">Malik Arslan</span>, a passionate <span className="text-teal-400 font-semibold">MERN Stack Developer</span> 
-          transforming ideas into functional and visually engaging web apps.
+          I'm <span className="text-teal-400 font-semibold">Malik Arslan</span>, a passionate <span className="text-teal-400 font-semibold">MERN Stack Developer </span> 
+           transforming ideas into functional and visually engaging web apps.
         </p>
 
         <p className="text-gray-300 leading-relaxed">
@@ -125,10 +125,10 @@ function About() {
           delay: index * 0.2,
         }}
         viewport={{ once: false }}
-        className="flex flex-col items-center justify-center w-24"
+        className="flex flex-col items-center justify-center w-24 "
       >
-        <div className="w-20 h-20 flex items-center justify-center rounded-full bg-white/10 text-white text-sm shadow-lg hover:scale-110 transition-transform cursor-pointer">
-          <div className="text-xl text-gradient">{skill.icon}</div>
+        <div className="w-20 h-20 flex items-center justify-center rounded-full  bg-white/10 border-teal-400 text-teal-800 text-sm  hover:scale-110 transition-transform cursor-pointer">
+          <div className="text-xl text-shadow-teal-400">{skill.icon}</div>
         </div>
         <span className="mt-2 text-sm text-white font-medium">{skill.name}</span>
       </motion.div>

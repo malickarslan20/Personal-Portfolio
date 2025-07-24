@@ -92,7 +92,7 @@ function Projects() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-white/10 border border-white/20 text-white rounded-lg text-sm hover:bg-white/20"
+                  className="px-4 border-teal-400 py-2 bg-white/10 border  text-white rounded-lg text-sm hover:bg-white/20"
                 >
                   GitHub
                 </a>
