@@ -32,7 +32,8 @@ function Home() {
         </p>
 
         {/* Buttons */}
-        <div className="space-x-4">
+       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+
           <button
             onClick={() => scrollToSection('projects')}
             className="relative inline-block px-6 py-3 rounded-lg font-medium text-white 
